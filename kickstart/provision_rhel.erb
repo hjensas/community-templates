@@ -66,7 +66,7 @@ repo --name=puppetlabs-deps --baseurl=http://yum.puppetlabs.com/el/<%= @host.ope
 <% end -%>
 <% end -%>
 
-bootloader --location=mbr --append="<%= @host.params['bootloader-append'] || 'nofb quiet splash=quiet' %>" <%= grub_pass %>
+bootloader --location=mbr --append="<%= @host.params['bootloader-append'] || 'nofb quiet splash=quiet' %> <%= 'net.ifnames=0' if ['VMWare'].include?(@host.provider)-%>" <%= grub_pass %>
 <% if os_major == 5 -%>
 key --skip
 <% end -%>
